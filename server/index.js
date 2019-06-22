@@ -1,29 +1,55 @@
+require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+var mongoose = require('mongoose');
+var db = require('../database-mongo/index');
+var axios = require('axios');
 
 var app = express();
 
-// UNCOMMENT FOR REACT
-// app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../react-client/dist'));
 
-// UNCOMMENT FOR ANGULAR
-// app.use(express.static(__dirname + '/../angular-client'));
-// app.use(express.static(__dirname + '/../node_modules'));
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
+app.get('/api/:title', (req, res) => {
+  // console.log(req.params.title);
+  // db.checkEntry(req.params.title, (err, results) => {
+  //   if (err) {
+  //     console.log('going for imdb')
+      axios.get(`http://www.omdbapi.com/?apikey=${process.env.API_KEY}&t=${req.params.title}`)
+      .then((data) => {
+        // console.log('data.data in server', data.data);
+        // db.insertEntry(data.data, (err) => {
+        //   console.log('insert into mongo')
+        //   if (err) { 
+        //     throw err 
+        //   } else {
+            res.send(data.data);
+        //   }
+        // })
+      })
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(400);
+      })
+  //   } else {
+  //     console.log('found on mongo', results);
+  //     res.send(results);
+  //   }
+  // })
+})
+
+app.get('/info', (req, res) => {
+  db.selectAll((err, results) => {
+    if (err) { res.sendStatus(400)}
+    res.send(results)
+  })
+})
+
+mongoose.connect('mongodb://localhost/movies', {useNewUrlParser: true}, (err) => {
+  if (err) { throw error }
+  app.listen(3000, function() {
+    console.log('listening on port 3000!');
   });
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
-});
 

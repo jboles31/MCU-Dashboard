@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
 
 var db = mongoose.connection;
 
@@ -11,21 +10,58 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+var infoSchema = mongoose.Schema({
+  movies: [],
 });
 
-var Item = mongoose.model('Item', itemSchema);
+const Movies = mongoose.model('marvel', infoSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+var titlesSchema = mongoose.Schema({
+  Title: String,
+  Year: String,
+  Actors: String,
+  Plot: String,
+  Poster: String,
+})
+
+const Titles = mongoose.model('title', titlesSchema)
+
+var selectAll = (callback) => {
+  Movies.find({}).limit(1).exec((err, info) => {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, info);
     }
   });
 };
 
-module.exports.selectAll = selectAll;
+var insertEntry = (entry, callback) => {
+  console.log("entry in insert", entry)
+  Titles.create({title: entry.Title, year: entry.Year, cast: entry.Actors, synopsis: entry.Plot, pic: entry.Poster}, (err) => {
+    if (err) { callback(err) }
+  })
+}
+
+var checkEntry = (entry, callback) => {
+  entry = entry.replace('+', ' ');
+  console.log('entry title',entry)
+  Titles.find({title: entry}).exec((err, info) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      console.log('found in database', info)
+      if (info) {
+        
+      } else {
+        callback(null, info[0])
+      }
+    }
+  })
+}
+
+module.exports = {
+  selectAll,
+  checkEntry,
+  insertEntry,
+};
