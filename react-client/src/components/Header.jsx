@@ -15,9 +15,9 @@ const Header = (props) => {
   }
 
   return (
-    <div>
+    <div className="header">
       <h1> Marvel Cinematic Universe </h1>
-      <div>
+      <div className="button-container">
       {buttonGen()}
       </div>
     </div>

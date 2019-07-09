@@ -5,8 +5,9 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import View from './components/View.jsx';
 import Header from './components/Header.jsx';
-import { EventEmitter } from 'events';
+// import { EventEmitter } from 'events';
 // import search from '../server/api.jsx';
+import style from './main.scss';
 
 
 class App extends React.Component {
@@ -63,7 +64,7 @@ class App extends React.Component {
   }
 
   render () {
-    return (<div>
+    return (<div className="app-wrapper">
       <Header search={this.search} movies={this.state.movies}/>
       <View info={this.state}/>
     </div>)
