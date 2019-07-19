@@ -37,12 +37,12 @@ var selectAll = (callback) => {
 };
 
 var insertEntry = (entry, callback) => {
-  console.log("entry.Title in insert", entry.Title)
+
   Titles.create({Title: entry.Title, Year: entry.Year, Actors: entry.Actors, Plot: entry.Plot, Poster: entry.Poster}, (err) => {
     if (err) {
       callback('err') 
     } else {
-      console.log('saved')
+      console.log('saved to db')
       callback();
     }
   })
@@ -50,12 +50,11 @@ var insertEntry = (entry, callback) => {
 
 var checkEntry = (entry, callback) => {
   entry = entry.replace('+', ' ');
-  console.log('entry title', entry)
+
   Titles.find({Title: entry}, (err, info) => {
       if (info.length === 0) {
         callback('err', null)
       } else {
-        // console.log('found in database', info)
         callback(null, info[0])
     }
   })

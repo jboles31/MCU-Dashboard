@@ -1,5 +1,6 @@
 // require('dotenv').config();
 // import {} from 'dotenv/config'
+import 'bootstrap'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
@@ -47,7 +48,6 @@ class App extends React.Component {
       method: 'GET',
       url: `/api/${param}`, 
       success: (data) => {
-        console.log(data);
         this.setState({
           title: data.Title,
           year: data.Year,
