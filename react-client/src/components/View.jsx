@@ -1,22 +1,32 @@
 import React from 'react';
-import { Container, Col } from 'react-bootstrap'
 import $ from 'jquery';
 
 const View = (props) => (
-  <Container className="row">
-    <div className="div-sm-4">
+  <div className="view">
+    <div className="poster-wrapper"> 
       <img className="poster" src={props.info.pic} />
     </div>
-    <div className="col-sm-8">
+    <div className="info-wrapper">
       <div className="info">
-        <div className="title">{props.info.title}</div>
-        <div className="year">{props.info.year}</div>
-        <p>{props.info.cast}</p>
-        <h3>{props.info.order}</h3> 
-        <p>{props.info.synopsis}</p>
+        <div className="info-header">
+          <h1>{props.info.title}</h1>
+          <h3>{props.info.order} out of 22</h3> 
+        </div>
+        <div className="info-overview">
+          <p><b>Directed By:</b> {props.info.director}</p>
+          <p><b>Cast:</b> {props.info.cast}</p>
+          <p><b>Plot:</b> {props.info.synopsis}</p>
+          <p><b>Writen By:</b> {props.info.writers}</p>
+        </div>
+        <div className="info-specs">
+          <p><b>Released:</b> {props.info.released}</p>
+          <p><b>IMDB Rating:</b> {props.info.rating}</p>
+          <p><b>Runtime:</b> {props.info.runtime}</p>
+          <p><b>Domestic Total Gross:</b> {props.info.boxoffice}</p>
+        </div>
       </div>
     </div>
-  </Container>
+  </div>
 )
 
 export default View;

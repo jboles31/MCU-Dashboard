@@ -22,6 +22,13 @@ var titlesSchema = mongoose.Schema({
   Actors: String,
   Plot: String,
   Poster: String,
+  Released: String,
+  Runtime: String,
+  Director: String,
+  Writer: String,
+  Awards: String,
+  imdbRating: String,
+  BoxOffice: String,
 })
 
 const Titles = mongoose.model('title', titlesSchema)
@@ -38,7 +45,7 @@ var selectAll = (callback) => {
 
 var insertEntry = (entry, callback) => {
 
-  Titles.create({Title: entry.Title, Year: entry.Year, Actors: entry.Actors, Plot: entry.Plot, Poster: entry.Poster}, (err) => {
+  Titles.create({Title: entry.Title, Year: entry.Year, Actors: entry.Actors, Plot: entry.Plot, Poster: entry.Poster, Released: entry.Released, Runtime: entry.Runtime, Director: entry.Director, Writer: entry.Writer, Awards: entry.Awards, imdbRating: entry.imdbRating, BoxOffice: entry.BoxOffice}, (err) => {
     if (err) {
       callback('err') 
     } else {

@@ -15,13 +15,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [], 
-      title: '',
-      year: '',
-      cast: [],
-      synopsis: '',
-      order: '',
-      pic: '',
+      movies: [],
+      movie: {
+        title: '',
+        year: '',
+        cast: [],
+        synopsis: '',
+        order: '',
+        pic: '',
+        released: '',
+        runtime: '',
+        director: '',
+        writers: '',
+        awards: '',
+        rating: '',
+        boxoffice: '',
+      }, 
+      showView: false,
     }
 
     this.search = this.search.bind(this);
@@ -49,12 +59,22 @@ class App extends React.Component {
       url: `/api/${param}`, 
       success: (data) => {
         this.setState({
-          title: data.Title,
-          year: data.Year,
-          cast: data.Actors,
-          synopsis: data.Plot,
-          order: `${this.state.movies.indexOf(data.Title) + 1}`,
-          pic: data.Poster,
+          movie: {
+            title: data.Title,
+            year: data.Year,
+            cast: data.Actors,
+            synopsis: data.Plot,
+            order: `${this.state.movies.indexOf(data.Title) + 1}`,
+            pic: data.Poster,
+            released: data.Released,
+            runtime: data.Runtime,
+            director: data.Director,
+            writers: data.Writer,
+            awards: data.Awards,
+            rating: data.imdbRating,
+            boxoffice: data.BoxOffice,
+          },
+          showView: true,
         })
       },
       error: (err) => {
@@ -64,10 +84,19 @@ class App extends React.Component {
   }
 
   render () {
-    return (<div className="app-wrapper">
-      <Header search={this.search} movies={this.state.movies}/>
-      <View info={this.state}/>
-    </div>)
+    if (this.state.showView === false) {
+      return (
+        <div className="app-wrapper">
+          <Header search={this.search} movies={this.state.movies}/>
+        </div>
+      );
+    } else {
+      return (
+        <div className="app-wrapper">
+          <Header search={this.search} movies={this.state.movies}/>
+          <View info={this.state.movie}/>
+        </div>)
+    }
   }
 }
 
