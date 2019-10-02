@@ -2,8 +2,7 @@
 
 This is a collection of all the Marvel Cinematic Universe movies. As you click on a movie it's information will appear below the dashboard. The app checks the MongoDB for the movie's information and if it is not stored there than the app will make an API call to OMDB to retrieve the relevant data. It will then create a new entry in the MongoDB for that movie so on subsequent calls the data will be available without an API call.
 
-![Dashboard-Demo](demo.gif | width=1000)
-<img src="https://github.com/jboles31/MCU-Dashboard/blob/master/demo.gif" alt="MCU-Dashboard-Demo" width="1000" height="700">
+<img src="https://github.com/jboles31/MCU-Dashboard/blob/master/demo.gif" alt="MCU-Dashboard-Demo" width="1000" height="550">
 
 ## Getting Started
 
