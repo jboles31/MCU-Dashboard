@@ -28,7 +28,6 @@ app.get('/api/:title', (req, res) => {
         res.sendStatus(400);
       })
     } else {
-      console.log('found in db');
       res.send(results);
     }
   })
