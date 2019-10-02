@@ -49,7 +49,6 @@ var insertEntry = (entry, callback) => {
     if (err) {
       callback('err') 
     } else {
-      console.log('saved to db')
       callback();
     }
   })
