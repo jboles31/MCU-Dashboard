@@ -8,7 +8,7 @@ This is a collection of all the Marvel Cinematic Universe movies. As you click o
 
 * Install Dependencies
 ```bash
-npm run dev
+npm install
 ```
 * Build webpack bundle, and start development server
 ```bash
