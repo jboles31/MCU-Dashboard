@@ -6,6 +6,7 @@ var db = require('../database-mongo/index');
 var axios = require('axios');
 
 var app = express();
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -42,7 +43,7 @@ app.get('/info', (req, res) => {
 
 mongoose.connect('mongodb://localhost/movies', {useNewUrlParser: true}, (err) => {
   if (err) { throw error }
-  app.listen(3001, function() {
+  app.listen(PORT, function() {
     console.log('listening on port 3000!');
   });
 });
