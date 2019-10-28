@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server/index.js",
+    "build": "webpack --config webpack.config.js",
     "react-dev": "webpack -d --watch",
-    "start": "nodemon server/index.js"
+    "start-dev": "nodemon server/index.js"
   },
   "author": "Beth Johnson",
   "license": "ISC",

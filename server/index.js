@@ -42,7 +42,7 @@ app.get('/info', (req, res) => {
 
 mongoose.connect('mongodb://localhost/movies', {useNewUrlParser: true}, (err) => {
   if (err) { throw error }
-  app.listen(3000, function() {
+  app.listen(3001, function() {
     console.log('listening on port 3000!');
   });
 });
